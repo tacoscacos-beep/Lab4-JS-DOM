@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration Platform</title>
+    <!-- Подключение файла стилей -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-theme">
+
+    <!-- ШАПКА ПРИЛОЖЕНИЯ: Заголовок и управляющие элементы -->
+    <header class="header">
+        <h1>Event Registration Portal</h1>
+        <div class="header-controls">
+            
+            <!-- Блок уведомлений (колокольчик с бейджиком и выпадающим списком) -->
+            <div class="notifications-wrapper">
+                <button class="icon-btn" id="notif-btn" onclick="toggleNotifications(event)" title="Notifications">
+                    🔔 <span id="notif-badge" class="badge" style="display: none;">0</span>
+                </button>
+                <div id="notif-dropdown" class="notif-dropdown" style="display: none;">
+                    <div class="notif-header">
+                        <span>Notifications</span>
+                        <button onclick="clearNotifications()" class="clear-notif-btn">Clear</button>
+                    </div>
+                    <div id="notif-list" class="notif-list">
+                        <p class="no-notifs">No new notifications</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопка переключения тем (светлая / темная) -->
+            <button class="icon-btn theme-toggle-btn" onclick="toggleTheme()" title="Toggle Theme">🌙</button>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕЙНЕР -->
+    <main class="container">
+        
+        <!-- СЕКЦИЯ ВЫБОРА МЕРОПРИЯТИЙ (Карточки) -->
+        <section class="events-section">
+            <h2>Select an Event</h2>
+            <div class="events-grid">
+                <div class="event-card" data-event="Web Design Workshop">
+                    <h3>Web Design Workshop</h3>
+                    <p class="event-time">📅 Oct 18, 2026 | 15:00</p>
+                    <p>Learn modern UI/UX principles and Figma basics.</p>
+                    <button class="select-btn" onclick="selectEvent('Web Design Workshop', this)">Select</button>
+                </div>
+                <div class="event-card" data-event="JavaScript Quiz">
+                    <h3>JavaScript Quiz</h3>
+                    <p class="event-time">📅 Oct 20, 2026 | 17:00</p>
+                    <p>Test your JS knowledge and win awesome prizes.</p>
+                    <button class="select-btn" onclick="selectEvent('JavaScript Quiz', this)">Select</button>
+                </div>
+                <div class="event-card" data-event="IT Career Talk">
+                    <h3>IT Career Talk</h3>
+                    <p class="event-time">📅 Oct 25, 2026 | 18:30</p>
+                    <p>Meet industry leaders and learn how to land your first job.</p>
+                    <button class="select-btn" onclick="selectEvent('IT Career Talk', this)">Select</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ ФОРМЫ РЕГИСТРАЦИИ -->
+        <section class="form-section">
+            <h2>Registration Form</h2>
+            <form id="registration-form" novalidate>
+                
+                <!-- Поле: Полное имя -->
+                <div class="form-group">
+                    <label for="full-name">Full Name:</label>
+                    <input type="text" id="full-name" placeholder="Enter your full name">
+                    <div class="input-footer">
+                        <small class="error-message" id="name-error"></small>
+                        <small id="name-counter" class="counter-text">0 characters</small>
+                    </div>
+                </div>
+
+                <!-- Поле: Email -->
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" placeholder="name@example.com">
+                    <div class="input-footer">
+                        <small class="error-message" id="email-error"></small>
+                        <small id="email-counter" class="counter-text">0 characters</small>
+                    </div>
+                </div>
+
+                <!-- Поле: Группа студента -->
+                <div class="form-group">
+                    <label for="student-group">Student Group:</label>
+                    <input type="text" id="student-group" placeholder="e.g. SE-231">
+                    <div class="input-footer">
+                        <small class="error-message" id="group-error"></small>
+                        <small id="group-counter" class="counter-text">0 characters</small>
+                    </div>
+                </div>
+
+                <!-- Выбранное событие (инпут только для чтения) -->
+                <div class="form-group">
+                    <label>Selected Event:</label>
+                    <input type="text" id="selected-event-input" readonly placeholder="Please choose a card above">
+                    <small class="error-message" id="event-error"></small>
+                </div>
+
+                <!-- Чекбокс согласия с правилами -->
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="agreement"> I agree to the event rules and terms
+                    </label>
+                    <small class="error-message" id="agreement-error"></small>
+                </div>
+
+                <!-- Кнопка отправки формы -->
+                <button type="submit" class="submit-btn">Register for Event</button>
+            </form>
+        </section>
+
+        <!-- СЕКЦИЯ РЕЗУЛЬТАТОВ (Список регистраций) -->
+        <section class="results-section">
+            <h2>My Registrations</h2>
+            <ul id="registration-list">
+                <!-- Элементы добавляются динамически через JavaScript -->
+            </ul>
+        </section>
+    </main>
+
+    <!-- Подключение скрипта -->
+    <script src="script.js"></script>
+</body>
+</html>
